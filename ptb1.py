@@ -1,23 +1,33 @@
-from telegram.ext import Updater, CommandHandler
+import os
+
+from telegram.ext import CommandHandler, Updater
+
 
 def start_func(update, context):
-    update.message.reply_text(text='hi!')
-    print(update.message.text)
-    print(context.bot)
+    user = update.effective_user
+    if user is None:
+        return
 
-    show = update.message.from_user.id = f'user-id: {update.message.from_user.id}'
-    show = update.message.from_user.first_name = f'name: {update.message.from_user.first_name}'
-    show = update.message.from_user.last_name = f'last-name: {update.message.from_user.last_name}'
-    show = update.message.from_user.username = f'username: @{update.message.from_user.username}\n'
+    username = f"@{user.username}" if user.username else "not set"
+    update.message.reply_text(
+        "Your Telegram profile information:\\n"
+        f"User ID: {user.id}\\n"
+        f"First name: {user.first_name or 'not set'}\\n"
+        f"Last name: {user.last_name or 'not set'}\\n"
+        f"Username: {username}"
+    )
 
 
-    show = update.message.from_user.id,update.message.from_user.first_name, update.message.from_user.last_name, update.message.from_user.username
-    for i in show:
-        print(i)
+def main():
+    token = os.getenv("BOT_TOKEN")
+    if not token:
+        raise RuntimeError("Set the BOT_TOKEN environment variable before starting the bot.")
 
-updater = Updater(token='')
-dispatcher = updater.dispatcher
-dispatcher.add_handler(CommandHandler('start', start_func))
+    updater = Updater(token=token, use_context=True)
+    updater.dispatcher.add_handler(CommandHandler("start", start_func))
+    updater.start_polling()
+    updater.idle()
 
-updater.start_polling()
-updater.idle()
+
+if __name__ == "__main__":
+    main()
