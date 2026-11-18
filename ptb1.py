@@ -10,10 +10,10 @@ def start_func(update, context):
 
     username = f"@{user.username}" if user.username else "not set"
     update.message.reply_text(
-        "Your Telegram profile information:\\n"
-        f"User ID: {user.id}\\n"
-        f"First name: {user.first_name or 'not set'}\\n"
-        f"Last name: {user.last_name or 'not set'}\\n"
+        "Your Telegram profile information:\n"
+        f"User ID: {user.id}\n"
+        f"First name: {user.first_name or 'not set'}\n"
+        f"Last name: {user.last_name or 'not set'}\n"
         f"Username: {username}"
     )
 
