@@ -30,7 +30,7 @@ def show_menu(update, context):
 
 def message_handler(update, context):
     update.message.reply_text(
-        f"You sent: {update.message.text}\\n"
+        f"You sent: {update.message.text}\n"
         "This practice bot does not process that message."
     )
 
