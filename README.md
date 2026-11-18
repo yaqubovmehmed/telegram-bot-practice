@@ -1,53 +1,57 @@
 # Telegram Bot Practice
 
-A collection of beginner Telegram bot projects built with Python and `python-telegram-bot`.
+Two small Python bot examples using \x60python-telegram-bot\x60 13.x. They demonstrate commands, keyboards, user information, text handling, and user-shared contacts and locations.
 
-## Projects
+## Examples
 
-### 1. Telegram User Info Bot
+### \x60ptb1.py\x60 — Telegram user info
 
-A simple bot created to practice working with Telegram user information.
+The \x60/start\x60 command replies to the same user with their Telegram ID, name, and username. The bot does not forward this information to an admin.
 
-It demonstrates how to access:
+### \x60ptb2.py\x60 — menu, contact, and location handlers
 
-* User ID
-* First name
-* Last name
-* Username
-* Incoming message text
-* Bot context
+The \x60/menu\x60 command displays buttons to share a contact or location. When a user chooses one of these buttons, the bot sends that information to the configured admin ID.
 
-**File:** `ptb1.py`
+**Privacy:** contact and location are personal information. Only use the share buttons when you intend to send those details to the bot owner. Keep the bot token private.
 
-### 2. Telegram Menu Handler Bot
+## Requirements
 
-A basic Telegram bot with a custom keyboard and different message handlers.
+- Python 3.8+
+- A Telegram bot token from [@BotFather](https://t.me/BotFather)
+- The admin's numeric Telegram user ID for \x60ptb2.py\x60
 
-It demonstrates:
+## Setup
 
-* `/start` command
-* `/menu` command
-* Reply keyboard
-* Text message handling
-* Contact handling
-* Location handling
-* Sending received contact information to an admin
-* Sending received location information to an admin
+Create and activate a virtual environment, then install the pinned dependency:
 
-**File:** `ptb2.py`
+**Windows PowerShell**
+\x60\x60\x60powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+$env:BOT_TOKEN="your-token-from-botfather"
+$env:ADMIN_ID="123456789"
+\x60\x60\x60
 
-## Technologies
+**Linux / macOS**
+\x60\x60\x60bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+export BOT_TOKEN="your-token-from-botfather"
+export ADMIN_ID="123456789"
+\x60\x60\x60
 
-* Python
-* python-telegram-bot
-* Telegram Bot API
+Start one example:
 
-## Purpose
+\x60\x60\x60bash
+python ptb1.py
+# or
+python ptb2.py
+\x60\x60\x60
 
-These projects were created for learning and practicing the fundamentals of Telegram bot development with Python.
+Set \x60ADMIN_ID\x60 before running \x60ptb2.py\x60. Do not put a real bot token in source code or commit it to GitHub.
 
-## Note
+## Library version
 
-Before running the bots, add your own Telegram Bot API token and required configuration values.
-
-Do not publish real bot tokens or other sensitive credentials to GitHub.
+These scripts use the version 13 API (\x60Updater\x60 and \x60Filters\x60); the dependency is pinned in \x60requirements.txt\x60.
